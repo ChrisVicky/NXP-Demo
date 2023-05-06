@@ -8,6 +8,8 @@
 
 ## Bug
 
+* [ ] GIF refreshes too slow or wrongly when interfered by mouse.
+    * ![image_2023-05-06-15-37-22](img/image_2023-05-06-15-37-22.png)
 * [ ] Window Size Error. Actual Window Size exceeds valid zone.
     * ![Error](./img/image_2023-05-06-15-24-40.png)
 
