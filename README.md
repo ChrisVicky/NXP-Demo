@@ -5,6 +5,7 @@
 * [x] [2023-04-26] Run on Linux Dist
 * [x] [2023-05-06] Run on Windows Machines
 * [ ] On Board Examination
+* [ ] [docs](/docs.md)
 
 ## Bug
 
