@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(LV_CONF_BUILD_DISABLE_DEMOS TRUE)
 set(LV_CONF_BUILD_DISABLE_EXAMPLES TRUE)
 
+set(SDL2_DIR x86_64-w64-mingw32)
+
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
 
 INCLUDE_DIRECTORIES(music/custom)
@@ -13,7 +15,11 @@ INCLUDE_DIRECTORIES(music/generated)
 INCLUDE_DIRECTORIES(music/import)
 INCLUDE_DIRECTORIES(music/generated/guider_fonts)
 INCLUDE_DIRECTORIES(lvgl/src)
+INCLUDE_DIRECTORIES(${SDL2_DIR}/include)
+
 # INCLUDE_DIRECTORIES(music)
+
+link_directories(${SDL2_DIR}/bin)
 
 file(GLOB_RECURSE INCLUDES "./*.h" )
 
@@ -31,6 +37,6 @@ add_executable(main main.c mouse_cursor_icon.c ${SOURCES} ${CUSTOMS} ${INCLUDES}
 
 add_compile_definitions(LV_CONF_INCLUDE_SIMPLE)
 
-target_link_libraries(main PRIVATE lvgl ${SDL2_LIBRARIES} )
+target_link_libraries(main PRIVATE lvgl ${SDL2_LIBRARIES})
 
 add_custom_target (run COMMAND ${EXECUTABLE_OUTPUT_PATH}/main)

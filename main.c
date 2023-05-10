@@ -16,6 +16,8 @@
 #include "gui_guider.h"
 #include "events_init.h"
 #include "custom.h"
+#include "SDL.h"
+
 lv_ui guider_ui;
 
 /*********************
