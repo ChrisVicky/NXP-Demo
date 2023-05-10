@@ -77,7 +77,8 @@ int main(int argc, char **argv)
     lv_group_set_default(lv_group_create());
 
     /*Initialize the HAL (display, input devices, tick) for LVGL*/
-    hal_init(800, 480);
+    // 480x272 Resolution
+    hal_init(480, 272);
 
     //  lv_example_switch_1();
     //  lv_example_calendar_1();
