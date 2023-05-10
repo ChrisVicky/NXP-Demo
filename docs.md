@@ -8,28 +8,23 @@
 ## 配置`vscode`调试环境
 1. 下载代码
 ```bash
-git clone xxx
+git clone --recursive https://github.com/littlevgl/pc_simulator_sdl_eclipse.git
 ```
-
 2. 手动编译：检查缺失环境，例如`SDL2`之类
 ```bash
-# Makefile 存在
+# Makefile 存在, 但官方建议使用 cmake 工具链
 make
-# 只有 CMakeLists.txt
+# cmake
 mkdir build && cd build
 cmake ..
-make
+make 
+# make -j<num> 可以开启多线程编译，其中`<num>`线程数量
+# 例如：make -j8
 ```
 
 3. 手动编译通过后，在`vscode`中下载如下插件
-
-<center>
-    <img style="border-radius: 0.3125em;box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
-        src="img/image_2023-05-10-10-10-55.png"><br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #999;padding: 2px;">vscode插件</div>
-</center>
-
-4. 编辑`.vscode/tasks.json`以及`.vscode/launch.json`等文件加入调试指令
+    * ![img/image_2023-05-10-10-10-55.png](img/image_2023-05-10-10-10-55.png)
+4. 编辑`.vscode/tasks.json`以及`.vscode/launch.json`文件加入调试配置
     * `tasks.json`
     ```json
    {
@@ -38,9 +33,9 @@ make
            {
                "type": "shell",
                "label": "Build",
-               "command": "make",
+               "command": "cmake .. && make",
                "options": {
-                   "cwd": "${workspaceFolder}"
+                   "cwd": "${workspaceFolder}/build"
                },
                "presentation": {
                    "echo": true,
@@ -78,7 +73,7 @@ make
           "type": "cppdbg",
           "request": "launch",
           // built by `make` command, specified by `Makefile`
-          "program": "${workspaceFolder}/build/bin/demo",
+          "program": "${workspaceFolder}/bin/main",
           "args": [],
           "stopAtEntry": false,
           "cwd": "${workspaceFolder}",
@@ -97,7 +92,17 @@ make
       ]
     }
     ```
+    > 大致意思就是`launch.json`告诉`vscode`你要进行`Debug`之前需要跑一下`Build`这个任务，然后在`tasks.json`里定义`Build`任务为在`build`文件夹下进行`cmake .. && make`编译
 
+5. 进行编译、调试
+    1. 在`CMakeLists.txt`文件中设置`set(CMAKE_BUILD_TYPE Debug)`
+    2. 选择`preLaunchTask`为`Build`的选项
+    ![img/image_2023-05-10-11-32-00.png](img/image_2023-05-10-11-32-00.png)
+    3. 接下来在`vscode`中打断点就能生效了
+
+
+
+## `clion`配置
 ## `GUI-Guider`生成使用`v9`代码
 ## 嵌入`v9`代码并修改相应`API`成功编译
 
